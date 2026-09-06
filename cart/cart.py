@@ -74,5 +74,25 @@ class Cart:
     
     
     def get_total_price(self):
-        total = sum(Decimal(item['price']) * item['quantity'] for item in self.cart.values())
+        total = sum(Decimal(item['price']) * item['quantity'] 
+                    for item in self.cart.values())
         return total
+    
+    
+    def clear(self):
+        del self.session['cart']
+        self.save()
+        
+        
+    def get_cart_items(self):
+        items = []
+        for item in self:
+            items.append({
+                'product': item['product'],
+                'quantity': item['quantity'],
+                'size': item['size'],
+                'price': Decimal(item['price']),
+                'total_price': item['total_price'],
+                'cart_key': f"{item['product_id']}_{item['size']}"
+            })
+        return items
