@@ -48,7 +48,6 @@
             background-color: black;
         }
 
-        /* Mobile menu styles */
         .mobile-menu {
             transform: translateX(-100%);
             transition: transform 0.3s ease-in-out;
@@ -83,7 +82,6 @@
             transform: rotate(45deg) translate(-5px, -6px);
         }
 
-        /* Overlay */
         .overlay {
             opacity: 0;
             visibility: hidden;
@@ -95,7 +93,6 @@
             visibility: visible;
         }
 
-        /* HTMX loading indicator */
         .htmx-indicator {
             opacity: 0;
             transition: opacity 200ms ease-in;
@@ -111,10 +108,8 @@
 
 <body class="bg-white">
 
-    <!-- Mobile Menu Overlay -->
     <div id="overlay" class="overlay fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden"></div>
     
-    <!-- Mobile Menu -->
     <div id="mobileMenu" class="mobile-menu fixed top-0 left-0 w-80 h-full bg-white z-50 md:hidden shadow-lg">
         <div class="p-6">
             <div class="flex justify-between items-center mb-8">
@@ -158,18 +153,16 @@
         </div>
     </div>
 
-    <!-- Header -->
     <header class="sticky top-0">
         <div class="mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
-                <!-- Mobile Menu Button -->
+
                 <button id="menuToggle" class="hamburger md:hidden">
                     <span></span>
                     <span></span>
                     <span></span>
                 </button>
                 
-                <!-- Logo -->
                 <div class="flex-shrink-0">
                     <a href="{% url 'main:index' %}" 
                        hx-get="{% url 'main:index' %}" 
@@ -181,7 +174,6 @@
                     </a>
                 </div>
                 
-                <!-- Desktop Navigation -->
                 <nav class="hidden md:flex space-x-8">
                     {% for category in categories %}
                     <a href="{% url 'main:catalog' category.slug %}" 
@@ -194,7 +186,6 @@
                     {% endfor %}
                 </nav>
                 
-                <!-- Right side links -->
                 <div class="hidden md:flex items-center space-x-6">
                     <div class="relative" id="mobile-search-wrapper">
                         <button id="mobile-search-toggle" 
@@ -211,7 +202,6 @@
                     <a href="#" id="desktopCart" class="text-sm font-medium text-gray-900 hover:text-gray-700">Корзина (0)</a>
                 </div>
                 
-                <!-- Mobile Cart Icon -->
                 <div class="md:hidden">
                     <a href="#" id="mobileCartHeader" class="text-xs font-medium text-gray-900">Корзина (0)</a>
                 </div>
@@ -221,13 +211,10 @@
 
     <div id="cart-container"></div>
 
-    <!-- Loading Indicator -->
     <div class="htmx-indicator fixed top-0 left-0 w-full h-1 bg-black z-50"></div>
 
-    <!-- Main Content -->
     <div id="main-content">
         {% block content %}
-        <!-- Default home content -->
         <main class="mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div class="text-center py-20">
                 <h2 class="text-4xl font-bold tracking-tight text-gray-900 mb-4">
@@ -254,7 +241,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Mobile menu functionality
+
             const menuToggle = document.getElementById('menuToggle');
             const closeMenu = document.getElementById('closeMenu');
             const mobileMenu = document.getElementById('mobileMenu');
@@ -278,21 +265,16 @@
             closeMenu.addEventListener('click', closeMobileMenu);
             overlay.addEventListener('click', closeMobileMenu);
     
-            // Close mobile menu after navigation
             document.addEventListener('htmx:afterRequest', function() {
                 closeMobileMenu();
             });
     
-        
-    
-            // Close mobile menu on window resize
             window.addEventListener('resize', function() {
                 if (window.innerWidth >= 768) {
                     closeMobileMenu();
                 }
             });
     
-            // Update active navigation links after HTMX requests
             document.addEventListener('htmx:afterSettle', function() {
                 updateActiveNavLinks();
             });
@@ -309,7 +291,6 @@
                 });
             }
             
-            // Listen for cart updates
             document.addEventListener('cartUpdated', function(e) {
                 if (e.detail && e.detail.total_items !== undefined) {
                     updateHeaderCartCount(e.detail.total_items);
@@ -317,7 +298,6 @@
             });
         });
         
-        // Global function to update cart count
         window.updateHeaderCartCount = function(count) {
             const desktopCart = document.getElementById('desktopCart');
             const mobileCart = document.getElementById('mobileCart');
