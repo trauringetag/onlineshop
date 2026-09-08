@@ -29,7 +29,7 @@ class Cart(models.Model):
             cart=self,
             product=product,
             product_size=product_size,
-            defaults={'quantity', quantity}
+            defaults={'quantity': quantity}
         )
         
         if not created:
@@ -83,4 +83,4 @@ class CartItem(models.Model):
     
     @property
     def total_price(self):
-        return Decimal(str(self.product.price) * self.quantity)
+        return Decimal(str(self.product.price)) * self.quantity
