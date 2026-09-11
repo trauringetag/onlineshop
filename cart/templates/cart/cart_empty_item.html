@@ -1,8 +1,8 @@
-<!-- Empty div to replace removed item -->
+<!-- Пустой div для замены удаленного элемента -->
 <div style="display: none;" data-removed-item="{{ item_id }}"></div>
 
 <script>
-    // Update cart totals
+    // Обновление итоговой суммы корзины
     htmx.ajax('GET', '{% url "cart:cart_count" %}', {
         target: '#cart-count',
         swap: 'none',
@@ -11,13 +11,13 @@
             document.getElementById('cart-count').textContent = data.total_items;
             updateHeaderCartCount(data.total_items);
             
-            // Update subtotal
+            // Обновление промежуточного итога суммы
             const subtotalElement = document.querySelector('#cart-summary .font-bold:last-child');
             if (subtotalElement) {
-                subtotalElement.textContent = '$' + data.subtotal.toFixed(2);
+                subtotalElement.textContent = '€' + data.subtotal.toFixed(2);
             }
             
-            // If cart is empty, show empty message
+            // Если корзина пуста, показать сообщение
             if (data.total_items === 0) {
                 htmx.ajax('GET', '{% url "cart:cart_modal" %}', {
                     target: '#cart-modal',
