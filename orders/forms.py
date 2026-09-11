@@ -7,14 +7,14 @@ class OrderForm(forms.Form):
         max_length=50,
         widget=forms.TextInput(attrs={
             'class': 'w-full px-4 py-3 border border-black rounded-none text-black placeholder-gray-500 focus:outline-none focus:border-black',
-            'placeholder': 'First Name'
+            'placeholder': 'Имя'
         })
     )
     last_name = forms.CharField(
         max_length=50,
         widget=forms.TextInput(attrs={
             'class': 'w-full px-4 py-3 border border-black rounded-none text-black placeholder-gray-500 focus:outline-none focus:border-black',
-            'placeholder': 'Last Name'
+            'placeholder': 'Фамилия'
         })
     )
     email = forms.EmailField(
@@ -29,7 +29,7 @@ class OrderForm(forms.Form):
         required=False,
         widget=forms.TextInput(attrs={
             'class': 'w-full px-4 py-3 border border-black rounded-none text-black placeholder-gray-500 focus:outline-none focus:border-black',
-            'placeholder': 'Company (optional)'
+            'placeholder': 'Организация (необязательно)'
         })
     )
     address1 = forms.CharField(
@@ -37,7 +37,7 @@ class OrderForm(forms.Form):
         required=False,
         widget=forms.TextInput(attrs={
             'class': 'w-full px-4 py-3 border border-black rounded-none text-black placeholder-gray-500 focus:outline-none focus:border-black pr-10',
-            'placeholder': 'Address Line 1'
+            'placeholder': 'Основной адрес'
         })
     )
     address2 = forms.CharField(
@@ -45,7 +45,7 @@ class OrderForm(forms.Form):
         required=False,
         widget=forms.TextInput(attrs={
             'class': 'w-full px-4 py-3 border border-black rounded-none text-black placeholder-gray-500 focus:outline-none focus:border-black',
-            'placeholder': 'Address Line 2 (optional)'
+            'placeholder': 'Дополнительный адрес (необязательно)'
         })
     )
     city = forms.CharField(
@@ -53,7 +53,7 @@ class OrderForm(forms.Form):
         required=False,
         widget=forms.TextInput(attrs={
             'class': 'w-full px-4 py-3 border border-black rounded-none text-black placeholder-gray-500 focus:outline-none focus:border-black',
-            'placeholder': 'City'
+            'placeholder': 'Город'
         })
     )
     country = forms.CharField(
@@ -61,7 +61,7 @@ class OrderForm(forms.Form):
         required=False,
         widget=forms.TextInput(attrs={
             'class': 'w-full px-4 py-3 border border-black rounded-none text-black placeholder-gray-500 focus:outline-none focus:border-black',
-            'placeholder': 'Country'
+            'placeholder': 'Страна'
         })
     )
     province = forms.CharField(
@@ -69,7 +69,7 @@ class OrderForm(forms.Form):
         required=False,
         widget=forms.TextInput(attrs={
             'class': 'w-full px-4 py-3 border border-black rounded-none text-black placeholder-gray-500 focus:outline-none focus:border-black',
-            'placeholder': 'State/Province'
+            'placeholder': 'Область'
         })
     )
     postal_code = forms.CharField(
@@ -77,7 +77,7 @@ class OrderForm(forms.Form):
         required=False,
         widget=forms.TextInput(attrs={
             'class': 'w-full px-4 py-3 border border-black rounded-none text-black placeholder-gray-500 focus:outline-none focus:border-black',
-            'placeholder': 'Postal Code'
+            'placeholder': 'Почтовый индекс'
         })
     )
     phone = forms.CharField(
@@ -85,7 +85,7 @@ class OrderForm(forms.Form):
         required=False,
         widget=forms.TextInput(attrs={
             'class': 'w-full px-4 py-3 border border-black rounded-none text-black placeholder-gray-500 focus:outline-none focus:border-black pr-10',
-            'placeholder': 'Phone (optional)'
+            'placeholder': 'Телефон (необязательно)'
         })
     )
 
