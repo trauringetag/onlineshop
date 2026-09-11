@@ -1,12 +1,12 @@
 <main class="mx-auto px-4 sm:px-6 lg:px-8 py-8">
-    <!-- Breadcrumb -->
+    <!-- Вложенность вкладок -->
     <div class="mb-8">
         <nav class="text-sm text-gray-600">
             <a href="{% url 'main:index' %}" 
                hx-get="{% url 'main:index' %}" 
                hx-target="#main-content" 
                hx-push-url="true"
-               class="hover:text-gray-900">HOME</a>
+               class="hover:text-gray-900">ГЛАВНАЯ</a>
             <span class="mx-2">/</span>
             <a href="{% url 'main:catalog' product.category.slug %}" 
                hx-get="{% url 'main:catalog' product.category.slug %}" 
@@ -19,9 +19,9 @@
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
-        <!-- Product Images -->
+        <!-- Изображения товара -->
         <div class="space-y-4">
-            <!-- Main Image -->
+            <!-- Главное -->
             <div class="aspect-square overflow-hidden bg-gray-100">
                 {% if product.main_image %}
                     <img src="{{ product.main_image.url }}" 
@@ -29,12 +29,12 @@
                          class="w-full h-full object-cover">
                 {% else %}
                     <div class="w-full h-full bg-gray-200 flex items-center justify-center">
-                        <span class="text-gray-400">No Image</span>
+                        <span class="text-gray-400">Нет изображения</span>
                     </div>
                 {% endif %}
             </div>
 
-            <!-- Additional Images -->
+            <!-- Доп. изображения -->
             {% if product.images.all %}
             <div class="grid grid-cols-3 gap-2">
                 {% for image in product.images.all %}
@@ -49,20 +49,20 @@
             {% endif %}
         </div>
 
-        <!-- Product Info -->
+        <!-- Информация о товаре -->
         <div class="space-y-6">
             <div>
                 <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-gray-900 mb-2">
                     {{ product.name|upper }}
                 </h1>
                 <p class="text-lg text-gray-600 mb-4">{{ product.color|upper }}</p>
-                <p class="text-2xl font-bold text-gray-900">${{ product.price }}</p>
+                <p class="text-2xl font-bold text-gray-900">{{ product.price }} €</p>
             </div>
 
-            <!-- Sizes -->
+            <!-- Размеры -->
             {% if product.product_sizes.all %}
             <div>
-                <h3 class="text-sm font-medium text-gray-900 mb-3">SIZE</h3>
+                <h3 class="text-sm font-medium text-gray-900 mb-3">РАЗМЕР</h3>
                 <div class="grid grid-cols-4 gap-2">
                     {% for product_size in product.product_sizes.all %}
                     <div class="size-option">
@@ -84,50 +84,50 @@
             </div>
             {% else %}
             <div>
-                <h3 class="text-sm font-medium text-gray-900 mb-3">SIZE</h3>
-                <p class="text-sm text-gray-600">No sizes available</p>
+                <h3 class="text-sm font-medium text-gray-900 mb-3">РАЗМЕР</h3>
+                <p class="text-sm text-gray-600">Нет доступных размеров</p>
             </div>
             {% endif %}
 
-            <!-- Add to Cart -->
+            <!-- Добавление товара в корзину -->
             <div class="space-y-4">
                 <button id="add-to-cart-btn" 
                         class="w-full bg-black text-white py-3 px-6 text-sm font-medium hover:bg-gray-800 transition-colors"
                         onclick="addToCart()"
                         {% if not product.product_sizes.all %}disabled{% endif %}>
-                    ADD TO CART
+                    ДОБАВИТЬ В КОРЗИНУ
                 </button>
                 
                 <button class="w-full border border-gray-300 py-3 px-6 text-sm font-medium hover:border-gray-900 transition-colors">
-                    ADD TO WISHLIST
+                    ДОБАВИТЬ В ИЗБРАННОЕ
                 </button>
             </div>
 
-            <!-- Product Details -->
+            <!-- Описание товара -->
             <div class="border-t border-gray-200 pt-6">
-                <h3 class="text-sm font-medium text-gray-900 mb-3">DETAILS</h3>
+                <h3 class="text-sm font-medium text-gray-900 mb-3">ОПИСАНИЕ</h3>
                 <div class="prose prose-sm text-gray-600">
                     <p>{{ product.description|linebreaks }}</p>
-                    <p>Created: {{ product.created_at|date:"F d, Y" }}</p>
+                    <p>Создан: {{ product.created_at|date:"F d, Y" }}</p>
                 </div>
             </div>
 
-            <!-- Care Instructions -->
+            <!-- Инструкции по уходу -->
             <div class="border-t border-gray-200 pt-6">
-                <h3 class="text-sm font-medium text-gray-900 mb-3">CARE</h3>
+                <h3 class="text-sm font-medium text-gray-900 mb-3">СОВЕТЫ ПО УХОДУ</h3>
                 <div class="prose prose-sm text-gray-600">
-                    <p>Professional dry clean only</p>
-                    <p>Do not bleach</p>
-                    <p>Iron at low temperature</p>
+                    <p>Только профессиональная сухая чистка</p>
+                    <p>Не отбеливать</p>
+                    <p>Гладить при низкой температуре</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Related Products -->
+    <!-- Предложка -->
     {% if related_products %}
     <div class="mt-16 border-t border-gray-200 pt-16">
-        <h2 class="text-xl font-bold tracking-tight text-gray-900 mb-8">YOU MAY ALSO LIKE</h2>
+        <h2 class="text-xl font-bold tracking-tight text-gray-900 mb-8">ВАМ ТАКЖЕ МОЖЕТ ПОНРАВИТЬСЯ</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {% for related_product in related_products %}
             <div class="product-card group cursor-pointer" 
@@ -198,7 +198,7 @@
         const productSlug = '{{ product.slug }}';
         console.log('Product Slug:', productSlug);
         
-        // Update selected size before sending
+        // Обновить выбранный размер перед отправкой
         updateSelectedSize();
         console.log('Selected Size ID:', selectedSizeId);
 
@@ -295,7 +295,7 @@
             return;
         }
 
-        // Ensure at least one valid radio is checked
+        // Проверка на выбор хоть одной радио-кнопки
         let checkedRadio = Array.from(sizeRadios).find(radio => radio.checked && !radio.disabled);
         if (!checkedRadio && availableRadios.length > 0) {
             availableRadios[0].checked = true;
@@ -303,10 +303,10 @@
             console.log('Auto-checked first available radio:', checkedRadio.dataset.size, 'ID:', checkedRadio.value);
         }
 
-        // Update selected size
+        // Обновление выбранного размера
         updateSelectedSize();
 
-        // Add event listeners
+        // Обработчики событий
         sizeRadios.forEach(radio => {
             radio.addEventListener('change', function(e) {
                 if (this.disabled) {
